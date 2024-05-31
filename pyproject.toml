@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "gensci"
+version = "0.1.0"
+description = "Project developed to work computational biology"
+authors = ["Rodolfo Lima <rodolfo.eli.jrles@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,2 @@
+Path do repositório
+/mnt/c/Users/rodol/Documents/Pyprojeto/GenSci_Development-1
