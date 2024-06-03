@@ -1,5 +1,5 @@
-import Bio
 from math import log
+from Bio import SeqIO, Entrez
 
 seq = 'AGCTCGCTCGCTGCGTATAAAATCGCATCGCGCGCAGC'
 
@@ -67,3 +67,21 @@ def calcRelativeEntropy(seq, resCodes):
             H += h
     H /= log(base, 2.0)
     return H
+
+name = ""
+fileObj = open(name, "rU")
+
+
+#Coletando dadosd do NCBI
+from Bio import Entrez
+Entrez.email = 'rodolfo.eli.jrles@gmail.com'
+handle = Entrez.efetch(db="nucleotide", id="AY851612", rettype="gb", retmode="text")
+print(handle.readline().strip())
+
+
+Entrez.email = 'mickey@disney.com'
+socketObj = Entrez.efetch(db="protein", rettype="fasta", id="71066805")
+dnaObj = SeqIO.read(socketObj, "fasta")
+socketObj.close()
+print(dnaObj.description)
+print(dnaObj.seq)
