@@ -1,2 +1,10 @@
 Path do repositório
 /mnt/c/Users/rodol/Documents/Pyprojeto/GenSci_Development-1
+
+pegando dados de genoma
+1 entrar no db genomas e baixar a coluna refseq para um arquivo TSV
+2 copie os valores do TSV num arquivo de texto, 
+3 entre no batch entrez e escolha o database de assembly  escolhar o seu atquivo de refseq e clique em recuperar
+3 seleionce os genomas e baixe os assembly de acorda com os tipos de arquivo que vc quer
+4 os arquivos serão baixados em .tar ou .gz
+5. descompacte os arquivos
