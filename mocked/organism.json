@@ -1,11 +1,12 @@
-
 {
-    "sra":
-        {
-        "mycobacterium tuberculosys": "33234346"
-        },
-    "genome": 
-        {
-            "mycobacterium tuberculosys":"166"
-        }
+    "sra": {
+        "mycobacterium tuberculosis": "33234346",
+        "Escherichia coli": "33245618"
+    },
+    "genome": {
+        "mycobacterium tuberculosis": "166"
+    },
+    "gene": {
+        "BRCA1": [2154581229, 2154581209, 2154581196, 2154581177, 2154581153, 2154581095, 2154581067, 2154581033, 2154580998, 2154580948]
+    }
 }
