@@ -1,5 +1,6 @@
 from math import log
 from Bio import SeqIO, Entrez
+from subprocess import run, call
 
 seq = 'AGCTCGCTCGCTGCGTATAAAATCGCATCGCGCGCAGC'
 
@@ -85,3 +86,41 @@ dnaObj = SeqIO.read(socketObj, "fasta")
 socketObj.close()
 print(dnaObj.description)
 print(dnaObj.seq)
+
+def SequenceIdentity(seqA, seqB):
+    numPlaces = min(len(seqA), len(seqB))
+    score = 0.0
+    for nucleotide in range(numPlaces):
+        if seqA[nucleotide] == seqB[nucleotide]:
+            score+=1.0
+    return 100.0 * score/numPlaces
+
+def seqSimilarity(seqA,seqB,simMatrix):
+    numPlaces = min(len(seqA), len(seqB))
+    totalScore=0.0
+    for i in range(numPlaces):
+        
+        residueA = seqA[i]
+        residueB = seqB[i]
+        
+        totalScore =+ simMatrix[residueA][residueB]
+        
+        return totalScore
+
+def pairAlignScore(alignA, alignB, simMatrix, insert=8, extend=4):
+    totalScore = 0.0
+    n = min(len(alignA), len(alignB))
+    for i in range(n):
+        residueA = alignA[i]
+        residueB = alignB[i]
+        
+        if '-' not in (residueA, residueB):
+            simScore = simMatrix[residueA][residueB]
+        elif (i>0) and ('-' in (alignA[i-1],alignB[i-1])):
+            simScore = -extend
+        else:
+            simScore = -insert
+            
+        totalScore += simScore
+        
+    return totalScore

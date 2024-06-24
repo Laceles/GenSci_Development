@@ -1250,6 +1250,16 @@ files = [
 six = ">=1.5"
 
 [[package]]
+name = "python-subprocess2"
+version = "2.0.2"
+description = "Extensions to the upstream python subprocess module"
+optional = false
+python-versions = "*"
+files = [
+    {file = "python-subprocess2-2.0.2.tar.gz", hash = "sha256:8d335a8229986c57c94e98aa7c6599f4e888784657332497654f26e0a59afc9e"},
+]
+
+[[package]]
 name = "pytz"
 version = "2024.1"
 description = "World timezone definitions, modern and historical"
@@ -1814,4 +1824,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "b124ec96852a27ac8908b231a73f26707abbf933f8d4d4cf9c112046a020c4f7"
+content-hash = "5900327d9787b3ff70aa490056866526754d9ac6dd25a1968e57d3381c2072f1"
