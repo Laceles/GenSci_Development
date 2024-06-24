@@ -1,20 +1,20 @@
 [tool.poetry]
 name = "gensci"
-version = "0.1.0"
+version = "0.1.1"
 description = "Project developed to work computational biology"
 authors = ["Rodolfo Lima <rodolfo.eli.jrles@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
-scikit-bio = "^0.6.0"
-bio = "^1.7.1"
-numpy = "^1.26.4"
-kivy = "^2.3.0"
-typer = "^0.12.3"
-scikit-learn = "^1.5.0"
-simplejson = "^3.19.2"
-python-subprocess2 = "^2.0.2"
+python = "3.10"
+scikit-bio = "0.6.0"
+bio = "1.7.1"
+numpy = "1.26.4"
+kivy = "2.3.0"
+typer = "0.12.3"
+scikit-learn = "1.5.0"
+simplejson = "3.19.2"
+python-subprocess2 = "2.0.2"
 
 
 [tool.poetry.group.dev.dependencies]
