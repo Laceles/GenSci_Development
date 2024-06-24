@@ -1,5 +1,6 @@
 import json
 from Bio import Entrez, SeqIO
+from subprocess import run, CalledProcessError
 
 
 Entrez.email = "joserodolfo.silva@ufpe.br"
@@ -38,4 +39,18 @@ def get_genvariants_info(db='snp',term=str, retmax=int):
 # Baixando variantes genéticas
 def get_genvariants(db='snp', id=int, rettype="gb", retmode="text"):
     handle = Entrez.efetch(db=db, id=id, rettype="gb", retmode=retmode)
+
+def get_reads_cli(serial_number):
+    try:
+        command = ['prefetch', serial_number]
+        
+        result = run(command, capture_output=True, text=True, check=True)
+        
+        print("Prefetch executado com sucesso!")
+        print("Saída:", result.stdout)
+    
+    except CalledProcessError as e:
+        print("Erro ao executar prefetch:")
+        print(e.stderr)
+
 
