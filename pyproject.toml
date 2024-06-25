@@ -6,7 +6,7 @@ authors = ["Rodolfo Lima <rodolfo.eli.jrles@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.10"
+python = "3.10.12"
 scikit-bio = "0.6.0"
 bio = "1.7.1"
 numpy = "1.26.4"
@@ -15,6 +15,7 @@ typer = "0.12.3"
 scikit-learn = "1.5.0"
 simplejson = "3.19.2"
 python-subprocess2 = "2.0.2"
+hmmlearn = "^0.3.2"
 
 
 [tool.poetry.group.dev.dependencies]

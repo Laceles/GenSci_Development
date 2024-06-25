@@ -40,6 +40,7 @@ def get_genvariants_info(db='snp',term=str, retmax=int):
 def get_genvariants(db='snp', id=int, rettype="gb", retmode="text"):
     handle = Entrez.efetch(db=db, id=id, rettype="gb", retmode=retmode)
 
+# Comando para baixar as reads
 def get_reads_cli(serial_number):
     try:
         command = ['prefetch', serial_number]

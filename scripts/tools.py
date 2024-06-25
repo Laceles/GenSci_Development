@@ -1,6 +1,9 @@
 from math import log
 from Bio import SeqIO, Entrez
 from subprocess import run, call
+import numpy as np
+from hmmlearn import hmm
+import pickle 
 
 seq = 'AGCTCGCTCGCTGCGTATAAAATCGCATCGCGCGCAGC'
 
@@ -124,3 +127,60 @@ def pairAlignScore(alignA, alignB, simMatrix, insert=8, extend=4):
         totalScore += simScore
         
     return totalScore
+
+
+def transition_matrix(states, n_states):
+    trans_counts = np.zeros((n_states, n_states))
+    
+    for state_seq in states:
+        for (s1, s2) in zip(state_seq[:-1], state_seq[1:]):
+            trans_counts[s1, s2] += 1
+    
+    transmat_ = trans_counts / trans_counts.sum(axis=1, keepdims=True)
+    return transmat_
+
+def emission_matrix(states, observations, n_states, n_observations):
+    emiss_counts = np.zeros((n_states, n_observations))
+    
+    for state_seq, obs_seq in zip(states, observations):
+        for s, o in zip(state_seq, obs_seq):
+            emiss_counts[s, o] += 1
+    
+    emissionprob_ = emiss_counts / emiss_counts.sum(axis=1, keepdims=True)
+    return emissionprob_
+
+def startprob_matrix(states, n_states): 
+    start_counts = np.zeros(n_states)
+    
+    for state_seq in states:
+        start_counts[state_seq[0]] += 1
+    
+    startprob_ = start_counts / start_counts.sum()
+    return startprob_
+
+def trainning_markov_model(HiddenStates, observation, n_HiddenStates:int, n_observations:int):
+    
+    emissions_array = np.concatenate([np.array(seq).reshape(-1, 1) for seq in observation])
+    lengths = [len(seq) for seq in observation]
+    
+    model = hmm.MultinomialHMM(n_components=n_HiddenStates, n_iter=100, tol=0.01)
+    
+    model.fit(emissions_array, lengths=lengths)
+    
+    startprob_ = startprob_matrix(HiddenStates, n_HiddenStates)
+    transmat_ = transition_matrix(HiddenStates, n_HiddenStates)
+    emissionprob_ = emission_matrix(HiddenStates, observation, n_HiddenStates, n_observations)
+    
+    model.startprob_ = startprob_
+    model.transmat_ = transmat_
+    model.emissionprob_ = emissionprob_
+    
+    with open("algorithms/model.pkl", "wb") as arquivo:
+	    pickle.dump(model, arquivo)
+    
+def run_markov_model(new_observations):
+    
+    model = pickle.load(open("model.pkl", "rb"))
+    
+    state_sequence = model.decode(new_observations, algorithm="viterbi")
+    return state_sequence
